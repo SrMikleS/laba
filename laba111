@@ -1,0 +1,37 @@
+from math import pi
+
+def process_rectangles(lengths, widths):
+    def calculate_circle_area(radius):
+        return pi * radius ** 2
+
+    areas = []
+    rectangles = zip(lengths, widths)
+
+    for length, width in rectangles:
+        diagonal = (length**2 + width**2)**0.5
+        circle_area = calculate_circle_area(diagonal / 2)
+        areas.append(circle_area)
+
+    average_area = sum(areas) / len(areas)
+    filtered_areas = list(filter(lambda x: x <= average_area * 1.1, areas))
+
+    if not filtered_areas:
+        raise ValueError("No values left after filtering.")
+
+    product_of_filtered_areas = 1
+    for area in filtered_areas:
+        product_of_filtered_areas *= area
+
+    result = product_of_filtered_areas / len(filtered_areas)
+    return result
+
+
+# Пример использования:
+lengths = [10, 4, 5]
+widths = [4, 5, 12]
+
+try:
+    answer = process_rectangles(lengths, widths)
+    print(f"Итоговый ответ: {answer:.2f}")
+except ValueError as e:
+    print(e)
