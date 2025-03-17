@@ -1,0 +1,20 @@
+import random
+
+def play_dice_game(players):
+    results = {}
+    
+    for player in players:
+        # Генерируем случайное число от 1 до 6
+        roll_result = random.randint(1, 6)
+        print(f"{player} бросил кости: {roll_result}")
+        
+        # Сохраняем результат броска для каждого игрока
+        results[player] = roll_result
+    
+    # Определяем победителя (игрок с наибольшим числом)
+    winner = max(results, key=results.get)
+    print(f"Победителем стал {winner}!")
+
+# Пример использования
+players = ["Иван", "Петр", "Мария"]
+play_dice_game(players)
